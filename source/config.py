@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 
 
@@ -21,25 +23,25 @@ class Config(object):
 
     # 博客信息
     # 管理员姓名
-    ADMIN_NAME = '银时'
+    ADMIN_NAME = '大肥牛'
     # 管理员登录信息
-    ADMIN_LOGIN_NAME = 'yinshi'
+    ADMIN_LOGIN_NAME = 'nicefeiniu'
     # 登录密码
     ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD') or 'password'
-    # 博客名
-    SITE_NAME = '意外'
+    # 博客名 !注意，名字不能超过4位
+    SITE_NAME = '肥牛'
     # 博客标题
-    SITE_TITLE = '银时的博客'
+    SITE_TITLE = 'nice肥牛的博客'
     # 管理员简介
-    ADMIN_PROFILE = '克制力，执行力'
+    ADMIN_PROFILE = 'Anything is possible'
 
     # RSS站点信息
     # 站点协议
     WEB_PROTOCOL = 'http'
     # 站点域名
-    WEB_URL = 'www.yukunweb.com'
+    WEB_URL = 'blog.cow66.cn'
     # 站点创建时间
-    WEB_START_TIME = '2017-05-25'
+    WEB_START_TIME = '2020-02-02'
     # 显示条数
     RSS_COUNTS = 10
 
@@ -59,8 +61,8 @@ class Config(object):
 
     # cache 使用 Redis 数据库缓存配置
     CACHE_TYPE = 'redis'
-    CACHE_REDIS_HOST = '127.0.0.1'
-    CACHE_REDIS_PORT = 6379
+    CACHE_REDIS_HOST = os.getenv('REDIS_HOST') or '127.0.0.1'
+    CACHE_REDIS_PORT = os.getenv('REDIS_PORT') or 6379
     CACHE_REDIS_DB = os.getenv('CACHE_REDIS_DB') or ''
     CHCHE_REDIS_PASSWORD = os.getenv('CHCHE_REDIS_PASSWORD') or ''
 
@@ -79,19 +81,22 @@ class Config(object):
 
 
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:{password}@localhost:3306/mydb'.format(
+    # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:{password}@localhost:3306/mydb'.format(
+    #     password=Config.MYSQL_PASSWORD)
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
         password=Config.MYSQL_PASSWORD)
+
     DEBUG = True
 
 
 class TestingConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:{password}@localhost:3306/mydb'.format(
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
         password=Config.MYSQL_PASSWORD)
     TESTING = True
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:{password}@localhost:3306/mydb'.format(
+    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
         password=Config.MYSQL_PASSWORD)
     DEBUG = False
 

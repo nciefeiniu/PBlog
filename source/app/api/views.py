@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import jsonify, current_app, request, g
 from flask_login import login_required
 

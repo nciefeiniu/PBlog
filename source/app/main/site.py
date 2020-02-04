@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from flask import send_from_directory
 
 from . import main
