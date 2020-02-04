@@ -83,20 +83,21 @@ class Config(object):
 class DevelopmentConfig(Config):
     # SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:{password}@localhost:3306/mydb'.format(
     #     password=Config.MYSQL_PASSWORD)
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or \
+                              'postgresql://postgres:{password}@localhost:5432/mydb'.format(
         password=Config.MYSQL_PASSWORD)
 
     DEBUG = True
 
 
 class TestingConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
         password=Config.MYSQL_PASSWORD)
     TESTING = True
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or 'postgresql://postgres:{password}@localhost:5432/mydb'.format(
         password=Config.MYSQL_PASSWORD)
     DEBUG = False
 
